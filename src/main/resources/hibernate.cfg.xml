@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.username">root</property><!-- 账号 -->
+    <property name="connection.password">123456</property><!-- 密码 -->
+    <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="connection.url">jdbc:mysql:///hibernate?useUnicode=true&amp;characterEncoding=UTF-8</property>
+    <property name="dialect">org.hibernate.dialect.MySQLDialect</property><!-- 方言-->
+
+    <property name="show_sql">true</property><!-- 是否打印sql语句在控制台 -->
+    <property name="format_sql">true</property><!-- sql语句对齐 -->
+    <property name="hbm2ddl.auto">update</property><!-- creat:创建表  update:更新表 -->
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="model/Students.hbm.xml"/>
+    <mapping resource="model/Users.hbm.xml"/>
+    <mapping resource="model/Courses.hbm.xml"/> <!-- 这四行都是注册持久化层的映射文件 -->
+    <mapping resource="model/Teachers.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

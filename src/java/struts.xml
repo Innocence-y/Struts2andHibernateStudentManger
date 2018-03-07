@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+   <!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />-->
+   <!-- <constant name="struts.multipart.saveDir" value="true"></constant>-->
+    <package name="default" namespace="/" extends="struts-default">
+
+    </package>
+
+    <package name="Regist" extends="default" namespace="/" >
+        <action name="RegistAction" method="save" class="action.RegistAction">
+            <result name="save_success">/users/Users_login.jsp</result>
+            <result name="input">/regist.jsp</result>
+        </action>
+    </package>
+
+    <package name="users" namespace="/users" extends="default" strict-method-invocation="false">
+        <action name="*_*" class="action.{1}Action" method="{2}">
+            <result name="login_success">/users/Users_login_success.jsp</result>
+            <result name="login_false">/users/Users_login.jsp</result>
+            <result name="logout_success">/users/Users_login.jsp</result>
+            <result name="input">/users/Users_login.jsp</result><!-- validate返回的结果 -->
+        </action>
+    </package>
+
+    <package name="students" namespace="/students" extends="struts-default" strict-method-invocation="false">
+        <!--<action name="Students_query" class="action.StudentsAction" method="query">-->
+        <action name="*_*" class="action.{1}Action" method="{2}">
+            <result name="query_success">/students/Students_query_success.jsp</result>
+            <result name="delete_success" type="chain">Students_query</result><!-- chain表示接一个动作（查询query） -->
+            <result name="add_success" type="chain">Students_query</result>
+            <result name="queryById_success">/students/Students_queryById_success.jsp</result>
+            <result name="modify_success">/students/Students_modify.jsp</result>
+            <result name="save_success">/students/Students_modify_success.jsp</result>
+        </action>
+
+
+        <!--<action name="Students_query" class="action.StudentsAction" method="query">
+            <result name="query_success">/students/Students_query_success.jsp</result>
+        </action>
+        <action name="Students_delete" class="action.StudentsAction" method="delete">
+            <result name="delete_success" type="chain">Students_query</result>&lt;!&ndash; chain表示接一个动作（查询query） &ndash;&gt;
+        </action>
+
+        <action name="Students_add" class="action.StudentsAction" method="add">
+            <result name="add_success" type="chain">Students_query</result>
+        </action>
+
+        <action name="Students_modify" class="action.StudentsAction" method="modify">
+            <result name="modify_success">/students/Students_modify.jsp</result>
+        </action>-->
+    </package>
+
+    <package name="courses" namespace="/courses" extends="default" strict-method-invocation="false">
+        <action name="*_*" class="action.{1}Action" method="{2}">
+            <result name="query_success">/courses/courses_query_success.jsp</result>
+            <result name="delete_success" type="chain">Courses_query</result>
+            <result name="add_success" type="chain">Courses_query</result>
+        </action>
+
+        <!--<action name="Courses_query" class="action.CoursesAction" method="query">
+            <result name="query_success">/courses/courses_query_success.jsp</result>
+        </action>
+        <action name="Courses_delete" class="action.CoursesAction" method="delete">
+            <result name="delete_success" type="chain">Courses_query</result>
+        </action>
+        <action name="Courses_add" class="action.CoursesAction" method="add">
+            <result name="add_success" type="chain">Courses_query</result>
+        </action>-->
+    </package>
+
+    <package name="teachers" namespace="/teachers" extends="default" strict-method-invocation="false">
+        <action name="*_*" class="action.{1}Action" method="{2}">
+            <result name="query_success">/teachers/teachers_query_success.jsp</result>
+            <result name="query_nosuccess">/teachers/teachers_query_unsuccess.jsp</result>
+            <result name="delete_success" type="chain">Teachers_query</result>
+            <result name="add_success" type="chain">Teachers_query</result>
+        </action>
+
+        <!--<action name="Teachers_query" class="action.TeachersAction" method="query">
+            <result name="query_success">/teachers/teachers_query_success.jsp</result>
+            <result name="query_nosuccess">/teachers/teachers_query_unsuccess.jsp</result>
+        </action>
+
+        <action name="Teachers_delete" class="action.TeachersAction" method="delete">
+            <result name="delete_success" type="chain">Teachers_query</result>
+        </action>
+
+        <action name="Teachers_add" class="action.TeachersAction" method="add">
+            <result name="add_success" type="chain">Teachers_query</result>
+        </action>-->
+    </package>
+
+   <!-- <package name="file" namespace="/" extends="default">
+        &lt;!&ndash;<interceptors>
+            <interceptor name="fileUpload" class="action.UploadAction"></interceptor>
+        </interceptors>&ndash;&gt;
+
+        <action name="uploadAction" class="action.UploadAction" method="upload">
+            <interceptor-ref name="fileUpload">
+                &lt;!&ndash;<param name="allowedTypes">text/plain,image/jpg</param>&ndash;&gt;
+                <param name="maximumSize">2000000</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            &lt;!&ndash;<param name="savePath">f:/upload</param>&ndash;&gt;
+            <result>/success.jsp</result>
+            <result name="input">/upload.jsp</result>
+        </action>
+
+        <action name="download" class="action.DownloadAction">
+            &lt;!&ndash;<param name="inputPath">\image\${filename}</param>&ndash;&gt;
+            <result name="success" type="stream">
+                <param name="contentType">application/octet-stream;charset=ISO8859-1</param>
+                <param name="inputName">targetFile</param>
+                <param name="contentDisposition">attachment;filename="${filename}"</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+    </package>-->
+
+</struts>
